@@ -1,0 +1,100 @@
+/* ═══════════════════════════════════════════════
+   RECONTINUUM — GLOBAL STYLES
+   Tailwind directives + base overrides only.
+   No component styles — use Tailwind utilities.
+═══════════════════════════════════════════════ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── LAYER: BASE ──────────────────────────────── */
+@layer base {
+  :root {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-obsidian-900 text-mist overflow-x-hidden;
+    font-family: 'Jost', system-ui, sans-serif;
+    font-weight: 300;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar        { width: 4px; }
+  ::-webkit-scrollbar-track  { @apply bg-obsidian-800; }
+  ::-webkit-scrollbar-thumb  { @apply bg-gold rounded-sm; }
+
+  /* Focus visible */
+  :focus-visible {
+    @apply outline-2 outline-gold outline-offset-2;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-gold/20 text-ivory;
+  }
+}
+
+/* ── LAYER: COMPONENTS ────────────────────────── */
+@layer components {
+  /* Gold gradient text utility */
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #c8a44a 0%, #e8c870 50%, #c8a44a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Section eyebrow label */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-eyebrow font-medium
+           uppercase tracking-[0.35em] text-gold;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply block w-6 h-px bg-gold flex-shrink-0;
+  }
+
+  /* Gold horizontal rule */
+  .gold-rule {
+    @apply w-full h-px opacity-30;
+    background: linear-gradient(90deg, transparent 0%, #c8a44a 30%, #e8c870 50%, #c8a44a 70%, transparent 100%);
+  }
+
+  /* Noise texture overlay */
+  .noise-overlay {
+    @apply fixed inset-0 pointer-events-none z-[9999] opacity-70;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  }
+
+  /* Reveal animation class (JS-driven) */
+  .reveal {
+    @apply opacity-0 translate-y-7
+           transition-all duration-[900ms] ease-spring;
+  }
+  .reveal.visible {
+    @apply opacity-100 translate-y-0;
+  }
+  .reveal-delay-1 { transition-delay: 100ms; }
+  .reveal-delay-2 { transition-delay: 200ms; }
+  .reveal-delay-3 { transition-delay: 300ms; }
+}
+
+/* ── FONTS ────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400;500;600&display=swap');
