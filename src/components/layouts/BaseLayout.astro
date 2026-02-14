@@ -16,28 +16,12 @@ const meta: SEOMeta = { ...seoMeta, ...seo };
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
----
-// Your existing frontmatter
----
+<!-- Preconnect for better performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<html>
-  <head>
-    <!-- Preconnect for better performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Your Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Your other head elements -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!-- etc -->
-  </head>
-  <body>
-    <slot />
-  </body>
-</html>
+<!-- Your Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
