@@ -1,0 +1,68 @@
+---
+// src/pages/index.astro
+// Main page — assembles all organisms
+// Zero JS by default; only ReconChat hydrates client:idle
+
+import BaseLayout from '../components/layouts/BaseLayout.astro';
+import Nav        from '../components/organisms/Nav.astro';
+import Hero       from '../components/organisms/Hero.astro';
+import About      from '../components/organisms/About.astro';
+import Portfolio  from '../components/organisms/Portfolio.astro';
+import Services   from '../components/organisms/Services.astro';
+import Contact    from '../components/organisms/Contact.astro';
+import Footer     from '../components/organisms/Footer.astro';
+import ReconChat  from '../components/organisms/ReconChat';
+
+// ─── Image paths ───────────────────────────────────────────────────────────
+// Place your images in /public/images/
+// Astro will serve them from the root
+const LOGO_SRC         = '/images/logo.png';
+const RAJMERIC_LOGO    = '/images/rajmeric-logo.png';
+const DESK_PHOTO       = '/images/desk-photo.jpg';
+---
+
+<BaseLayout>
+  <!-- Fixed Navigation -->
+  <Nav logoSrc={LOGO_SRC} />
+
+  <main id="main-content">
+    <!-- Hero — full-viewport -->
+    <Hero deskPhotoSrc={DESK_PHOTO} />
+
+    <!-- Gold divider -->
+    <div class="gold-rule" aria-hidden="true"></div>
+
+    <!-- About + Founder -->
+    <About />
+
+    <!-- Gold divider -->
+    <div class="gold-rule" aria-hidden="true"></div>
+
+    <!-- Portfolio -->
+    <Portfolio rajmericLogoSrc={RAJMERIC_LOGO} />
+
+    <!-- Gold divider -->
+    <div class="gold-rule" aria-hidden="true"></div>
+
+    <!-- Services / Capabilities -->
+    <Services />
+
+    <!-- Gold divider -->
+    <div class="gold-rule" aria-hidden="true"></div>
+
+    <!-- Contact -->
+    <Contact />
+  </main>
+
+  <!-- Footer -->
+  <Footer logoSrc={LOGO_SRC} />
+
+  <!--
+    ╔══════════════════════════════════════════════════════╗
+    ║  RECON CHATBOT — React Island                        ║
+    ║  client:idle = hydrates only after page is idle      ║
+    ║  Zero impact on initial Lighthouse score             ║
+    ╚══════════════════════════════════════════════════════╝
+  -->
+  <ReconChat client:idle />
+</BaseLayout>
