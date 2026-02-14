@@ -1,0 +1,90 @@
+---
+// src/components/organisms/About.astro
+
+import SectionTag from '../atoms/SectionTag.astro';
+import { founder, brandValues } from '../../data/company';
+---
+
+<section id="about" class="bg-[#111114]" aria-labelledby="about-heading">
+  <div class="max-w-[1400px] mx-auto px-[4vw] py-section grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+
+    <!-- Left: Company story -->
+    <div class="reveal">
+      <SectionTag text="Who We Are" />
+      <h2
+        id="about-heading"
+        class="font-display text-display-lg font-light text-ivory mt-4 mb-8"
+      >
+        Purpose-Driven<br />
+        <em class="text-gold-500 not-italic">Stewardship</em>
+      </h2>
+
+      <div class="space-y-5 text-[0.95rem] leading-[1.95] text-silver">
+        <p>
+          Recontinuum Holding Private Limited is a purpose-driven holding company committed
+          to building disciplined, science-led, and future-ready businesses that protect
+          and enhance human potential.
+        </p>
+        <p>
+          Founded by a former Indian Army professional, Recontinuum is shaped by the values
+          of integrity, resilience, precision, and long-term responsibility. Our leadership
+          philosophy is rooted in structured thinking, ethical execution, and unwavering
+          commitment to excellence.
+        </p>
+        <p>
+          Beyond operating businesses, Recontinuum functions as a strategic capital and
+          governance platform — nurturing high-quality ventures, strengthening institutional
+          systems, and enabling sustainable growth across sectors.
+        </p>
+        <p>
+          We believe true success is measured by enduring value created for individuals,
+          communities, and future generations.
+        </p>
+      </div>
+
+      <!-- Brand Values -->
+      <div class="grid grid-cols-2 gap-3 mt-10">
+        {brandValues.map(value => (
+          <div
+            class="border border-border p-4 flex items-center gap-3
+                   transition-all duration-300 hover:border-gold hover:bg-gold/5"
+          >
+            <span class="w-2 h-2 rounded-full bg-gold flex-shrink-0" aria-hidden="true"></span>
+            <span class="text-caption uppercase tracking-[0.12em] text-mist font-medium">
+              {value.name}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Right: Founder card -->
+    <div class="reveal [transition-delay:200ms] lg:sticky lg:top-28">
+      <div
+        class="bg-charcoal border border-border border-t-[3px] border-t-gold p-11"
+        role="region"
+        aria-label="Founder information"
+      >
+        <p class="text-eyebrow uppercase tracking-[0.3em] text-gold mb-5">
+          Founder &amp; Managing Director
+        </p>
+        <h3 class="font-display text-[2rem] font-light text-ivory leading-tight mb-1">
+          {founder.name}
+        </h3>
+        <p class="text-[0.75rem] tracking-[0.12em] text-silver mb-6 pb-6 border-b border-border">
+          {founder.role}
+        </p>
+        <p class="text-[0.88rem] leading-[1.85] text-silver mb-6">
+          {founder.bio}
+        </p>
+        <span
+          class="inline-flex items-center gap-2 text-[0.58rem] uppercase tracking-[0.15em]
+                 text-gold-500 border border-gold/30 px-4 py-2"
+        >
+          🎖️ {founder.background}
+        </span>
+      </div>
+    </div>
+
+  </div>
+</section>
