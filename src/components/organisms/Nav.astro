@@ -1,0 +1,118 @@
+---
+// src/components/organisms/Nav.astro
+// Fixed navigation with logo, links, CTA
+// Logo is large and prominent — 72px desktop, responsive down
+
+import { company, navLinks } from '../../data/company';
+
+interface Props {
+  logoSrc: string;
+}
+
+const { logoSrc } = Astro.props;
+---
+
+<header
+  id="main-nav"
+  class="fixed top-0 left-0 right-0 z-[1000] h-[90px] flex items-center justify-between px-[4vw]
+         bg-obsidian-900/92 backdrop-blur-xl border-b border-gold/15
+         transition-all duration-400
+         [&.nav-scrolled]:h-[72px] [&.nav-scrolled]:bg-obsidian-900/98 [&.nav-scrolled]:border-gold/25"
+  role="banner"
+>
+  <!-- LOGO — Large and prominent -->
+  <a
+    href="/"
+    class="flex items-center flex-shrink-0 group"
+    aria-label={company.name}
+  >
+    <img
+      src={logoSrc}
+      alt={company.name}
+      width="220"
+      height="72"
+      class="h-[72px] w-auto object-contain brightness-0 invert
+             transition-all duration-400
+             [.nav-scrolled_&]:h-[58px]
+             sm:h-[60px] sm:[.nav-scrolled_&]:h-[48px]
+             xs:h-[50px]"
+      loading="eager"
+      decoding="async"
+    />
+  </a>
+
+  <!-- Right side: links + CTA -->
+  <div class="flex items-center gap-10">
+    <!-- Desktop nav links -->
+    <nav class="hidden lg:flex items-center gap-10" aria-label="Main navigation">
+      <ul class="flex items-center gap-10 list-none">
+        {navLinks.map(link => (
+          <li>
+            <a
+              href={link.href}
+              class="text-caption font-medium uppercase tracking-[0.22em] text-silver
+                     relative pb-1 transition-colors duration-300
+                     hover:text-gold-400
+                     after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px
+                     after:bg-gold after:transition-all after:duration-350
+                     hover:after:w-full"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- CTA Button -->
+    <a
+      href="#contact"
+      class="hidden md:inline-flex items-center gap-2
+             text-caption font-semibold uppercase tracking-[0.2em]
+             text-obsidian-900 bg-gold-gradient px-5 py-3
+             transition-all duration-300 hover:-translate-y-0.5 hover:shadow-gold"
+    >
+      Engage →
+    </a>
+
+    <!-- Mobile hamburger (static — no JS needed for anchor links) -->
+    <details class="lg:hidden group">
+      <summary
+        class="list-none cursor-pointer p-2 text-silver hover:text-gold
+               transition-colors duration-200"
+        aria-label="Open menu"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <line x1="3" y1="6"  x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </summary>
+      <nav
+        class="absolute top-full left-0 right-0
+               bg-obsidian-900/98 border-b border-gold/15
+               py-6 px-[4vw] flex flex-col gap-5"
+        aria-label="Mobile navigation"
+      >
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            class="text-caption uppercase tracking-[0.25em] text-mist
+                   hover:text-gold transition-colors duration-200"
+          >
+            {link.label}
+          </a>
+        ))}
+        <a
+          href="#contact"
+          class="inline-flex w-fit items-center gap-2 mt-2
+                 text-caption font-semibold uppercase tracking-[0.2em]
+                 text-obsidian-900 bg-gold-gradient px-5 py-3"
+        >
+          Engage →
+        </a>
+      </nav>
+    </details>
+  </div>
+</header>
