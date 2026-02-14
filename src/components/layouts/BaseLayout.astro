@@ -1,7 +1,7 @@
 ---
 // src/components/layouts/BaseLayout.astro
-// Root layout — wraps every page
-import '../../../src/styles/global.css';
+// Root layout â€” wraps every page
+import '../../styles/global.css';
 import type { SEOMeta } from '../../types/index';
 import { seoMeta } from '../../data/company';
 
@@ -16,12 +16,6 @@ const meta: SEOMeta = { ...seoMeta, ...seo };
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
-<!-- Preconnect for better performance -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<!-- Your Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -52,12 +46,7 @@ const meta: SEOMeta = { ...seoMeta, ...seo };
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
 
     <!-- Favicon -->
-    <!-- Favicon -->
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#000000">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Schema.org structured data -->
     <script type="application/ld+json">
@@ -99,7 +88,7 @@ const meta: SEOMeta = { ...seoMeta, ...seo };
 </html>
 
 <script>
-  // ── Scroll reveal ──
+  // â”€â”€ Scroll reveal â”€â”€
   const reveals = document.querySelectorAll<HTMLElement>('.reveal');
   const io = new IntersectionObserver(
     (entries) => entries.forEach(e => {
@@ -109,7 +98,7 @@ const meta: SEOMeta = { ...seoMeta, ...seo };
   );
   reveals.forEach(el => io.observe(el));
 
-  // ── Nav shrink on scroll ──
+  // â”€â”€ Nav shrink on scroll â”€â”€
   const nav = document.getElementById('main-nav');
   if (nav) {
     window.addEventListener('scroll', () => {
