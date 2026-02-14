@@ -1,0 +1,108 @@
+---
+// src/components/layouts/BaseLayout.astro
+// Root layout — wraps every page
+import '../../../src/styles/global.css';
+import type { SEOMeta } from '../../types/index';
+import { seoMeta } from '../../data/company';
+
+interface Props {
+  seo?: Partial<SEOMeta>;
+}
+
+const { seo = {} } = Astro.props;
+const meta: SEOMeta = { ...seoMeta, ...seo };
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary SEO -->
+    <title>{meta.title}</title>
+    <meta name="description"  content={meta.description} />
+    <meta name="keywords"     content={meta.keywords} />
+    <meta name="author"       content="Recontinuum Holding Private Limited" />
+    <meta name="robots"       content="index, follow" />
+    <link rel="canonical"     href={meta.canonical ?? 'https://www.recontinuum.com/'} />
+
+    <!-- Open Graph -->
+    <meta property="og:title"       content={meta.ogTitle       ?? meta.title} />
+    <meta property="og:description" content={meta.ogDescription ?? meta.description} />
+    <meta property="og:url"         content={meta.canonical     ?? 'https://www.recontinuum.com/'} />
+    <meta property="og:type"        content="website" />
+    <meta property="og:site_name"   content="Recontinuum Holding Private Limited" />
+    {meta.ogImage && <meta property="og:image" content={meta.ogImage} />}
+
+    <!-- Twitter -->
+    <meta name="twitter:card"        content={meta.twitterCard ?? 'summary_large_image'} />
+    <meta name="twitter:title"       content={meta.ogTitle     ?? meta.title} />
+    <meta name="twitter:description" content={meta.ogDescription ?? meta.description} />
+
+    <!-- Performance hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Corporation",
+        "name": "Recontinuum Holding Private Limited",
+        "url": "https://www.recontinuum.com",
+        "logo": "https://www.recontinuum.com/images/logo.png",
+        "description": meta.description,
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Sangli",
+          "addressRegion": "Maharashtra",
+          "postalCode": "416416",
+          "addressCountry": "IN"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+91-72497-86797",
+          "contactType": "customer service",
+          "email": "recontinuum.hq@gmail.com"
+        },
+        "foundingDate": "2026",
+        "founder": {
+          "@type": "Person",
+          "name": "Rajan Bhosale"
+        }
+      })}
+    </script>
+  </head>
+
+  <body class="bg-obsidian-900 text-mist antialiased overflow-x-hidden">
+    <!-- Noise texture -->
+    <div class="noise-overlay" aria-hidden="true"></div>
+
+    <slot />
+  </body>
+</html>
+
+<script>
+  // ── Scroll reveal ──
+  const reveals = document.querySelectorAll<HTMLElement>('.reveal');
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    }),
+    { threshold: 0.08 }
+  );
+  reveals.forEach(el => io.observe(el));
+
+  // ── Nav shrink on scroll ──
+  const nav = document.getElementById('main-nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('nav-scrolled', window.scrollY > 60);
+    }, { passive: true });
+  }
+</script>
