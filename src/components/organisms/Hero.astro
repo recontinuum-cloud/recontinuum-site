@@ -1,0 +1,122 @@
+---
+// src/components/organisms/Hero.astro
+// Full-viewport hero with desk photo background, stats panel
+
+import Button from '../atoms/Button.astro';
+import { company, heroStats } from '../../data/company';
+
+interface Props {
+  deskPhotoSrc: string;
+}
+
+const { deskPhotoSrc } = Astro.props;
+---
+
+<section
+  id="hero"
+  class="relative min-h-screen flex flex-col justify-center
+         pt-[130px] pb-[120px] px-[4vw] overflow-hidden"
+  aria-label="Hero"
+>
+  <!-- Desk photo background -->
+  <div
+    class="absolute inset-0 bg-cover bg-center opacity-10 scale-105"
+    style={`background-image: url('${deskPhotoSrc}');`}
+    role="presentation"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Gradient overlays -->
+  <div
+    class="absolute inset-0 bg-hero-overlay"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="absolute inset-0 bg-gold-glow"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Geometric decoration -->
+  <div
+    class="absolute right-[7vw] top-1/2 -translate-y-1/2 w-[340px] h-[340px] opacity-15 pointer-events-none hidden xl:block"
+    aria-hidden="true"
+  >
+    <svg viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="170" cy="170" r="160" stroke="#c8a44a" stroke-width="0.5"/>
+      <circle cx="170" cy="170" r="115" stroke="#c8a44a" stroke-width="0.5"/>
+      <circle cx="170" cy="170" r="70"  stroke="#c8a44a" stroke-width="0.5"/>
+      <line x1="170" y1="10"  x2="170" y2="330" stroke="#c8a44a" stroke-width="0.5"/>
+      <line x1="10"  y1="170" x2="330" y2="170" stroke="#c8a44a" stroke-width="0.5"/>
+      <line x1="57"  y1="57"  x2="283" y2="283" stroke="#c8a44a" stroke-width="0.5"/>
+      <line x1="283" y1="57"  x2="57"  y2="283" stroke="#c8a44a" stroke-width="0.5"/>
+    </svg>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-[1400px] mx-auto w-full grid grid-cols-1 xl:grid-cols-[1fr_420px] gap-16 items-center">
+
+    <!-- Left: Main copy -->
+    <div class="animate-fade-up">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-3 text-eyebrow font-medium uppercase tracking-[0.35em] text-gold mb-8">
+        <span
+          class="w-2 h-2 rounded-full bg-gold animate-pulse-dot"
+          aria-hidden="true"
+        ></span>
+        Holding Company &nbsp;·&nbsp; Sangli, Maharashtra &nbsp;·&nbsp; India
+      </div>
+
+      <!-- Headline -->
+      <h1 class="font-display text-display-xl font-light text-ivory mb-6">
+        Building Enduring<br />
+        <em class="text-gold-gradient font-light not-italic">Businesses for a</em><br />
+        Better Future
+      </h1>
+
+      <!-- Tagline -->
+      <p class="flex items-center gap-4 text-eyebrow font-medium uppercase tracking-[0.45em] text-gold-500 mb-8">
+        <span class="w-10 h-px bg-gradient-to-r from-gold to-transparent flex-shrink-0" aria-hidden="true"></span>
+        {company.tagline}
+      </p>
+
+      <!-- Description -->
+      <p class="text-base leading-[1.85] text-silver max-w-[540px] mb-10">
+        {company.description}
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-wrap items-center gap-4">
+        <Button variant="primary" href="#contact">
+          Engage With Us →
+        </Button>
+        <Button variant="secondary" href="#about">
+          Our Story
+        </Button>
+      </div>
+    </div>
+
+    <!-- Right: Stats panel (desktop only) -->
+    <aside
+      class="hidden xl:block bg-charcoal/80 border border-border border-t-[3px] border-t-gold
+             p-10 backdrop-blur-sm animate-fade-up [animation-delay:300ms]"
+      aria-label="Company at a glance"
+    >
+      <p class="text-eyebrow uppercase tracking-[0.3em] text-gold mb-8">
+        Company at a Glance
+      </p>
+      {heroStats.map(stat => (
+        <div class="flex justify-between items-center py-5 border-b border-graphite last:border-none">
+          <span class="font-display text-[2.2rem] font-light text-gold-400 leading-none">
+            {stat.value}
+          </span>
+          <div class="text-right">
+            <span class="block text-caption uppercase tracking-[0.15em] text-mist mb-1">
+              {stat.label}
+            </span>
+            <span class="text-sm text-silver">{stat.sublabel}</span>
+          </div>
+        </div>
+      ))}
+    </aside>
+  </div>
+</section>
