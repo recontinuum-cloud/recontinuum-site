@@ -1,0 +1,40 @@
+---
+// src/components/atoms/Button.astro
+// Reusable button atom — supports primary, secondary, ghost variants
+
+interface Props {
+  variant?: 'primary' | 'secondary' | 'ghost';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  ariaLabel?: string;
+}
+
+const {
+  variant = 'primary',
+  href,
+  type = 'button',
+  class: className = '',
+  ariaLabel,
+} = Astro.props;
+
+const base = 'inline-flex items-center gap-2 text-caption font-medium uppercase tracking-[0.2em] transition-all duration-300 cursor-pointer';
+
+const variants = {
+  primary:   'bg-gold-gradient text-obsidian-900 px-8 py-4 hover:-translate-y-0.5 hover:shadow-gold',
+  secondary: 'border border-border text-mist px-8 py-4 hover:border-gold hover:text-gold-400 hover:-translate-y-0.5',
+  ghost:     'text-gold underline-offset-4 hover:underline',
+};
+
+const classes = `${base} ${variants[variant]} ${className}`;
+---
+
+{href ? (
+  <a href={href} class={classes} aria-label={ariaLabel}>
+    <slot />
+  </a>
+) : (
+  <button type={type} class={classes} aria-label={ariaLabel}>
+    <slot />
+  </button>
+)}
