@@ -1,0 +1,93 @@
+---
+// src/components/organisms/Footer.astro
+
+import { company, navLinks } from '../../data/company';
+
+interface Props {
+  logoSrc: string;
+}
+const { logoSrc } = Astro.props;
+
+const legalLinks = [
+  { label: 'Privacy Policy',  href: '/privacy'    },
+  { label: 'Terms of Use',    href: '/terms'       },
+  { label: 'Disclaimer',      href: '/disclaimer'  },
+  { label: 'Data Protection', href: '/data-policy' },
+] as const;
+---
+
+<footer class="bg-[#060608] border-t border-graphite" role="contentinfo">
+  <!-- Main footer -->
+  <div class="max-w-[1400px] mx-auto px-[4vw] pt-16 pb-12
+              grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr] gap-16">
+
+    <!-- Brand column -->
+    <div>
+      <a href="/" aria-label={company.name} class="inline-block mb-6">
+        <img
+          src={logoSrc}
+          alt={company.name}
+          width="200"
+          height="66"
+          class="h-[70px] w-auto brightness-0 invert opacity-85 object-contain"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+      <p class="text-[0.82rem] leading-[1.8] text-silver max-w-[300px]">
+        Building disciplined, science-driven, and future-defining enterprises that
+        protect and elevate human potential.
+      </p>
+      <div class="mt-6 text-[0.62rem] uppercase tracking-[0.1em] text-border">
+        CIN: {company.cin}
+      </div>
+    </div>
+
+    <!-- Navigation column -->
+    <nav aria-label="Footer navigation">
+      <p class="text-[0.6rem] uppercase tracking-[0.3em] text-gold mb-6">Navigation</p>
+      <ul class="space-y-3 list-none">
+        {navLinks.map(link => (
+          <li>
+            <a
+              href={link.href}
+              class="text-[0.85rem] text-silver hover:text-gold-400
+                     transition-colors duration-200"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Legal column -->
+    <nav aria-label="Legal links">
+      <p class="text-[0.6rem] uppercase tracking-[0.3em] text-gold mb-6">Legal</p>
+      <ul class="space-y-3 list-none">
+        {legalLinks.map(link => (
+          <li>
+            <a
+              href={link.href}
+              class="text-[0.85rem] text-silver hover:text-gold-400
+                     transition-colors duration-200"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="max-w-[1400px] mx-auto px-[4vw] py-6 border-t border-graphite
+              flex flex-col sm:flex-row justify-between items-center gap-4">
+    <p class="text-[0.68rem] tracking-[0.08em] text-silver">
+      © {new Date().getFullYear()} {company.name}. All Rights Reserved.
+    </p>
+    <p class="text-[0.62rem] tracking-[0.1em] text-border">
+      {company.tagline}
+    </p>
+  </div>
+</footer>
