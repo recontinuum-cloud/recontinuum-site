@@ -1,0 +1,62 @@
+---
+// src/components/organisms/Services.astro
+
+import SectionTag from '../atoms/SectionTag.astro';
+import { capabilities } from '../../data/company';
+---
+
+<section id="services" class="bg-[#111114]" aria-labelledby="services-heading">
+  <div class="max-w-[1400px] mx-auto px-[4vw] py-section reveal">
+
+    <!-- Header -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-end mb-16">
+      <div>
+        <SectionTag text="What We Do" />
+        <h2
+          id="services-heading"
+          class="font-display text-display-lg font-light text-ivory mt-4"
+        >
+          Core <em class="text-gold-500 not-italic">Capabilities</em>
+        </h2>
+      </div>
+      <p class="text-[0.95rem] leading-[1.9] text-silver">
+        Recontinuum provides a comprehensive suite of holding, governance, and strategic
+        services — ensuring each entity within our ecosystem operates with clarity,
+        compliance, and commercial acuity.
+      </p>
+    </div>
+
+    <!-- 3-column services grid -->
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-graphite"
+      role="list"
+      aria-label="Our capabilities"
+    >
+      {capabilities.map(cap => (
+        <article
+          class="bg-charcoal p-11 relative overflow-hidden
+                 transition-colors duration-400 hover:bg-[#1e1e24]
+                 before:absolute before:top-0 before:left-0 before:w-[3px] before:h-0
+                 before:bg-gold-gradient before:transition-all before:duration-400
+                 hover:before:h-full group"
+          role="listitem"
+          aria-label={cap.title}
+        >
+          <p class="font-display text-[3rem] font-light text-graphite leading-none mb-6
+                    transition-colors duration-400 group-hover:text-gold/20">
+            {cap.number}
+          </p>
+          <p class="text-[1.6rem] mb-4" role="img" aria-label={cap.title}>
+            {cap.icon}
+          </p>
+          <h3 class="font-display text-[1.3rem] font-light text-ivory mb-3 leading-tight">
+            {cap.title}
+          </h3>
+          <p class="text-[0.83rem] leading-[1.8] text-silver">
+            {cap.description}
+          </p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
