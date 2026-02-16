@@ -1,6 +1,6 @@
 ---
 // src/components/layouts/BaseLayout.astro
-// Root layout â€” wraps every page
+// Root layout — wraps every page
 import '../../styles/global.css';
 import type { SEOMeta } from '../../types/index';
 import { seoMeta } from '../../data/company';
@@ -90,7 +90,7 @@ const meta: SEOMeta = { ...seoMeta, ...seo };
 </html>
 
 <script>
-  // â”€â”€ Scroll reveal â”€â”€
+  // ── Scroll reveal ──
   const reveals = document.querySelectorAll<HTMLElement>('.reveal');
   const io = new IntersectionObserver(
     (entries) => entries.forEach(e => {
@@ -100,46 +100,7 @@ const meta: SEOMeta = { ...seoMeta, ...seo };
   );
   reveals.forEach(el => io.observe(el));
 
-  // â”€â”€ Nav shrink on scroll â”€â”€
-  const nav = document.getElementById('main-nav');
-  if (nav) {
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('nav-scrolled', window.scrollY > 60);
-    }, { passive: true });
-  }
-</script>          "telephone": "+91-72497-86797",
-          "contactType": "customer service",
-          "email": "recontinuum.hq@gmail.com"
-        },
-        "foundingDate": "2026",
-        "founder": {
-          "@type": "Person",
-          "name": "Rajan Bhosale"
-        }
-      })}
-    </script>
-  </head>
-
-  <body class="bg-obsidian-900 text-mist antialiased overflow-x-hidden">
-    <!-- Noise texture -->
-    <div class="noise-overlay" aria-hidden="true"></div>
-
-    <slot />
-  </body>
-</html>
-
-<script>
-  // â”€â”€ Scroll reveal â”€â”€
-  const reveals = document.querySelectorAll<HTMLElement>('.reveal');
-  const io = new IntersectionObserver(
-    (entries) => entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('visible');
-    }),
-    { threshold: 0.08 }
-  );
-  reveals.forEach(el => io.observe(el));
-
-  // â”€â”€ Nav shrink on scroll â”€â”€
+  // ── Nav shrink on scroll ──
   const nav = document.getElementById('main-nav');
   if (nav) {
     window.addEventListener('scroll', () => {
